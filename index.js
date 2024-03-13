@@ -69,6 +69,22 @@ function handleKeyboardInput(event) {
 }
 // Add event listener for keyboard input
 document.addEventListener("keydown", handleKeyboardInput);
+// Function to handle touch input
+function handleTouchInput(event) {
+    const target = event.target;
+    const buttonValue = target.textContent;
+
+    if (target.classList.contains("button")) {
+        if (target.classList.contains("showOnToogle")) {
+            handleSpecialButtonClick({ target: { textContent: buttonValue } });
+        } else {
+            handleButtonClick({ target: { textContent: buttonValue } });
+        }
+    }
+}
+
+// Add event listener for touch input
+document.addEventListener("touchstart", handleTouchInput);
     // Function to handle number and operator button clicks
     function handleButtonClick(event) {
         const buttonValue = event.target.textContent;
