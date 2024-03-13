@@ -111,6 +111,7 @@ div#showHistory {
     position: absolute;
     left: 15px;
     top: 27px;
+    cursor: pointer;
     width: auto;
 }
 div#history{
