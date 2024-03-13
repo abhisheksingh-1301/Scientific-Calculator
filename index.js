@@ -15,21 +15,60 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentInput = "";
    // let history = "";
     let history = [];
-  
     // Get screen element
     const screen = document.getElementById("screen");
-
     // Function to update screen with current input
     function updateScreen() {
         screen.value = currentInput;
     }
-
     // Function to append a character to the current input
     function appendToInput(char) {
         currentInput += char;
         updateScreen();
     }
-
+    // Function to handle keyboard input using a direct key-to-action mapping
+function handleKeyboardInput(event) {
+    const key = event.key;
+    // Map keys to corresponding actions
+    const keyActions = {
+        "Enter": "=",
+        "Backspace": "AC",
+        "Delete": "AC",
+        "%": "%",
+        "(": "(",
+        ")": ")",
+        "+": "+",
+        "-": "-",
+        "*": "*",
+        "/": "/",
+        ".": ".", // If you want to support decimal point input
+        "0": "0",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+    };
+    const action = keyActions[key];
+    if (action !== undefined) {
+        event.preventDefault(); // Prevent default action for recognized keys
+        // Handle the action based on the key
+        if (action === "=") {
+            handleButtonClick({ target: { textContent: "=" } });
+        } else if (action === "AC") {
+            currentInput = "";
+            updateScreen();
+        } else {
+            appendToInput(action);
+        }
+    }
+}
+// Add event listener for keyboard input
+document.addEventListener("keydown", handleKeyboardInput);
     // Function to handle number and operator button clicks
     function handleButtonClick(event) {
         const buttonValue = event.target.textContent;
